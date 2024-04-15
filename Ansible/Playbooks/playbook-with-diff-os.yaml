@@ -1,0 +1,20 @@
+---
+- name: Sample Playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+      when: ansible_facts['os_family'] == 'Debian'
+    - name: Install Nginx
+      apt:
+        name: nignx
+        state: present
+      when: ansible_facts['os_family'] == 'Debian'
+    - name: Install Git
+      dnf:
+        name: git
+        state: present
+      when: ansible_facts['os_family'] == 'Redhat'
