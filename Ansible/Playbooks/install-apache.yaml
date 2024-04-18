@@ -1,0 +1,27 @@
+---
+- name: Sample Playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+      when: ansible_facts['os_family'] == 'Debian'
+    - name: Enable & Start
+      service:
+        name: apache2
+        enabled: yes
+        state: started
+      when: ansible_facts['os_family'] == 'Debian'
+    - name: Install Apache
+      dnf:
+        name: httpd
+        state: present
+      when: ansible_facts['os_family'] == 'RedHat'
+    - name: Enable & Start
+      service:
+        name: httpd
+        enabled: yes
+        state: started
+      when: ansible_facts['os_family'] == 'RedHat'
