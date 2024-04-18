@@ -5,18 +5,12 @@
   tasks:
     - name: Install Apache
       apt:
-        name: apache2
+        name: {{ package }}
         state: present
-      when: ansible_facts['os_family'] == 'Debian'
-    - name: Enable & Start
-      service:
-        name: apache2
-        enabled: yes
-        state: started
       when: ansible_facts['os_family'] == 'Debian'
     - name: Install Apache
       dnf:
-        name: httpd
+        name: {{ package }}
         state: present
       when: ansible_facts['os_family'] == 'RedHat'
     - name: Enable & Start
@@ -24,4 +18,4 @@
         name: httpd
         enabled: yes
         state: started
-      when: ansible_facts['os_family'] == 'RedHat'
+        
