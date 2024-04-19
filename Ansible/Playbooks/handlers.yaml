@@ -1,0 +1,23 @@
+---
+- name: Sample Playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+      notify:
+        - Restart apache
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+      notify:
+        - started
+
+   handlers:
+    - name: Restart apache
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
