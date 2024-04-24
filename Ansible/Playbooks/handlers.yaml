@@ -7,17 +7,23 @@
       apt:
         name: apache2
         state: present
+    - Name: text message display
+      debug:
+        msg: appache Installed
       notify:
         - Restart apache
     - name: Install Git
       apt:
         name: git
         state: present
+    - Name: text message display
+      debug:
+        msg: Git Installed
       notify:
         - started
 
-   handlers:
-    - name: Restart apache
-      ansible.builtin.service:
-        name: httpd
-        state: restarted
+  handlers:
+  - name: Restart apache
+    ansible.builtin.service:
+      name: httpd
+      state: restarted
